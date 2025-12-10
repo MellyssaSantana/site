@@ -1,0 +1,485 @@
+/*==================================
+  1. IMPORT / VARIÁVEIS (CORES E FONTES)
+==================================*/
+
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Asset&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Tangerine:wght@400;700&display=swap');
+
+/* Definir as cores tema dark (Padrão) */
+:root,
+[data-theme='dark'] { /* CORRIGIDO: Seletor de tema */
+    --cor-fundo: #d84ccf; /* Roxo/Rosa Escuro Principal */
+    --cor-texto-principal: #fdfcfc; /* Branco para texto no fundo escuro */
+    --cor-texto-secundario: rgb(12, 12, 12); /* Cor de texto em seções de fundo claro/cards */
+    --menu-link: rgb(12, 12, 12);
+    --cor-borda: rgb(76, 12, 76);
+    --cor-cabeçalho: rgb(240, 139, 240);
+    --cor-hover-icone: #f7b3ed; /* Rosa Claro para hover */
+    --cor-fundo-secundaria: #131213; /* Fundo escuro para a descrição do vídeo/seções específicas */
+    --cor-fundo-card-texto: #fdfcfc; /* Fundo branco para texto dos cards */
+}
+
+/* Definir as cores tema light */
+[data-theme='light'] { /* CORRIGIDO: Seletor de tema */
+    --cor-fundo: #f0aff0; /* Rosa Claro Principal */
+    --cor-texto-principal: #f759f7; /* Rosa Forte para texto no fundo claro */
+    --cor-texto-secundario: rgb(18, 18, 18); /* Cor de texto em seções de fundo claro/cards */
+    --menu-link: rgb(18, 18, 18);
+    --cor-borda: rgb(244, 236, 244);
+    --cor-cabeçalho: rgb(240, 139, 240);
+    --cor-hover-icone: #e005f8; /* Roxo Forte para hover */
+    --cor-fundo-secundaria: #fdfcfc; /* Fundo branco */
+    --cor-fundo-card-texto: #fdfcfc; /* Fundo branco para texto dos cards */
+}
+
+/*==================================
+  2. RESET E ESTILOS GERAIS
+==================================*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%; 
+}
+
+body {
+    background: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-family: 'Bodoni Moda', 'Arial', sans-serif; 
+    transition: background 0.3s ease, color 0.3s ease; 
+}
+
+a {
+    color: var(--menu-link);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Inverter Cor Logo = Filtro */
+[data-theme='light'] .logo { 
+    filter: invert(1);
+}
+
+/* Estilos de Seção Padrão */
+#home,
+.livros,
+.sobre,
+#contatos { 
+    padding: 2.5rem 1rem;
+}
+
+/*==================================
+  3. TIPOGRAFIA (H1, H2, H3, P)
+==================================*/
+
+h1 {
+    font-size: 3.5rem;
+    font-family: "Bodoni Moda", serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+h2 {
+    font-family: "Bodoni Moda", serif;
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 2.0rem; 
+    font-family: "Bodoni Moda", serif;
+    font-weight: bold;
+    font-style: italic;
+    color: var(--cor-texto-secundario); 
+}
+
+p {
+    font-size: 1.6rem;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+
+/*==================================
+  4. CABEÇALHO E NAVEGAÇÃO
+==================================*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: var(--cor-fundo);
+    border-bottom: 5px solid var(--cor-borda);
+    position: fixed;
+    z-index: 9999;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s ease, border-color 0.3s ease; 
+}
+
+.logo {
+    width: 4.25rem;
+    height: 3.90rem;
+}
+
+/* NAV = UL // OL */
+.menu {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.menu-text {
+    color: var(--menu-link);
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    transition: color 0.3s ease; 
+}
+
+/* Toggle e Menu Mobile */
+.menu-desktop {
+    display: none;
+}
+
+.header-toggle {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1.6rem;
+}
+
+/* NOVO: Estilização customizada para o botão de tema */
+.btn-theme-custom {
+    background-color: var(--cor-fundo-secundaria) !important; 
+    color: var(--cor-texto-principal) !important; 
+    border: 1px solid var(--cor-borda);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Garante que o ícone do tema use a cor do texto principal */
+#toggleTheme i { 
+    color: var(--cor-texto-principal); 
+    font-size: 1.6rem; 
+    transition: color 0.3s ease;
+}
+
+#toggleTheme:hover i {
+    color: var(--cor-hover-icone);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-menu-mobile {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--cor-texto-principal); 
+    display: flex;
+    font-size: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.menu-mobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: var(--cor-cabeçalho);
+    width: 75%;
+    height: 100vh;
+    border-left: 1px solid var(--cor-borda);
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 6rem;
+    transition: .3s ease-in-out, background 0.3s ease, border-color 0.3s ease;
+    transform: translateX(100%);
+    z-index: 9998;
+}
+
+.menu-mobile.active {
+    transform: translateX(0%);
+}
+
+.menu-mobile .menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 2rem 1rem;
+}
+
+.menu-mobile .menu-link {
+    padding: 0.8rem 0;
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--cor-texto-secundario); 
+    transition: color 0.3s ease;
+}
+
+/*==================================
+  5. HOME E VÍDEO
+==================================*/
+
+#home {
+    padding-top: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-content {
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+    padding-top: 2.5rem;
+}
+
+.video iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+.descricao-video {
+    display: flex;
+    flex-direction: column;
+    background: var(--cor-fundo-secundaria); 
+    color: var(--cor-texto-principal); 
+    padding: 6.25rem 1rem 2rem;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: justify;
+    margin-top: -5.5rem;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.descricao-video h2 {
+    font-size: 2.2rem;
+    text-transform: none;
+    text-align: center;
+    margin-top: -2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: normal;
+    font-weight: 400;
+}
+
+/*==================================
+  6. SEÇÃO LIVROS (PROJETOS)
+==================================*/
+
+.livros {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.projetos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.projeto-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.img-card {
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--cor-fundo-card-texto); 
+    padding: 1rem;
+    border-radius: 0.5rem;
+    transition: background 0.3s ease; 
+}
+
+.card-titulo {
+    color: var(--cor-texto-secundario);
+    font-weight: 600; 
+    font-size: 2.4rem;
+    font-family: "Bodoni Moda", serif;
+    transition: color 0.3s ease; 
+}
+
+.card-descricao {
+    color: var(--cor-texto-secundario); 
+    font-weight: 400; 
+    font-size: 1.6rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    transition: color 0.3s ease; 
+}
+
+.card-lista {
+    list-style: none; 
+    padding-left: 0;
+}
+
+.card-item {
+    color: var(--cor-texto-secundario); 
+    font-weight: 400; 
+    font-size: 1.6rem;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease; 
+}
+
+.card-item i {
+    color: var(--cor-borda); 
+    transition: color 0.3s ease;
+}
+
+.card-item i:hover {
+    color: var(--cor-hover-icone);
+    transition: 0.3s ease-in-out;
+}
+
+/*==================================
+  7. REDES SOCIAIS E HOVER
+==================================*/
+
+.redes-sociais {
+    font-size: 2.5rem; 
+    gap: 1.5rem;
+}
+
+.redes-sociais i {
+    color: var(--cor-texto-principal);
+    transition: color 0.3s ease;
+}
+
+.redes-sociais i:hover {
+    color: var(--cor-hover-icone);
+    transition: 0.3s ease-in-out;
+}
+
+/* Cores específicas */
+.redes-sociais .instagram {
+    color: #fb04b1;
+}
+
+.redes-sociais .whatsapp {
+    color: rgb(58, 87, 29);
+}
+
+.redes-sociais .youtube {
+    color: #f90303;
+}
+
+.redes-sociais .tiktok { 
+    color: var(--cor-texto-principal); 
+}
+
+[data-theme='light'] .redes-sociais .tiktok { 
+    color: rgb(20, 20, 20); 
+}
+
+
+/*==================================
+  8. SEÇÃO SOBRE MIM
+==================================*/
+
+.sobre {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-bottom: 4rem;
+}
+
+.sobre-logo {
+    width: 100%;
+    border-radius: 50rem;
+    border: 2px solid var(--cor-borda);
+    transition: border-color 0.3s ease;
+}
+
+.sobre-descricao p {
+    text-align: justify;
+    color: var(--cor-texto-secundario); 
+    font-size: 1.6rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    transition: color 0.3s ease; 
+}
+
+
+/*==================================
+  9. RODAPÉ (FOOTER)
+==================================*/
+
+footer {
+    background: var(--cor-cabeçalho);
+    border-top: 1px solid var(--cor-fundo-secundaria);
+    color: var(--cor-texto-secundario);
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+footer p {
+    padding: 1rem 1rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+}
+
+footer a {
+    color: #080808;
+    font-weight: 600;
+}
+
+footer a:hover {
+    color: var(--cor-hover-icone);
+    transition: all 0.3s ease-in-out;
+}
+
+
+/*==================================
+  10. MEDIA QUERIES (RESPONSIVIDADE)
+==================================*/
+
+/* Telas até 768px */
+@media(max-width:768px) {
+    #home {
+        padding-top: 5rem;
+    }
+}
+
+/* Telas a partir de 768px (Tablet e Desktop) */
+@media (min-width: 768px) {
+    /* ... media queries ... */
+}
+
+/* Telas a partir de 992px (Desktop Médio) */
+@media (min-width: 992px) {
+    /* ... media queries ... */
+}
+
+/* Telas a partir de 1200px (Desktop Grande) */
+@media(min-width:1200px) {
+    /* ... media queries ... */
+}
+
+/* Telas a partir de 1400px (Desktop Extra Grande) */
+@media (min-width: 1400px) {
+    /* ... media queries ... */
+}
